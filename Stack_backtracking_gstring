@@ -1,0 +1,95 @@
+XPDF v4.04
+
+pdftotext gstring_poc
+
+Syntax Error: Couldn't read xref table
+Syntax Warning: PDF file is damaged - attempting to reconstruct xref table...
+Syntax Error (2786): Dictionary key must be a name object
+Syntax Error (2790): Dictionary key must be a name object
+Syntax Error (2795): Dictionary key must be a name object
+Syntax Error: Dictionary key must be a name object
+Syntax Error: End of file inside dictionary
+Syntax Error (485): Illegal character <3d> in hex string
+Syntax Error (490): Illegal character <80> in hex string
+Syntax Error (491): Illegal character <67> in hex string
+Syntax Error (492): Illegal character <74> in hex string
+Syntax Error (493): Illegal character <68> in hex string
+Syntax Error (501): Illegal character '>'
+Syntax Error (49): Dictionary key must be a name object
+Syntax Error (54): Dictionary key must be a name object
+Syntax Error (60): Dictionary key must be a name object
+Syntax Error (65): Dictionary key must be a name object
+Syntax Error (70): Dictionary key must be a name object
+Syntax Error (80): Dictionary key must be a name object
+Syntax Error (203): Dictionary key must be a name object
+Syntax Error (243): Dictionary key must be a name object
+Syntax Error (401): Dictionary key must be a name object
+Syntax Error (410): Dictionary key must be a name object
+Syntax Error (411): Dictionary key must be a name object
+Syntax Error (422): Dictionary key must be a name object
+Syntax Error (485): Illegal character <3d> in hex string
+Syntax Error (490): Illegal character <80> in hex string
+Syntax Error (491): Illegal character <67> in hex string
+Syntax Error (492): Illegal character <74> in hex string
+Syntax Error (493): Illegal character <68> in hex string
+Syntax Error (501): Illegal character '>'
+Syntax Error (1028): Illegal character ')'
+Syntax Error (1437): Illegal character ')'
+Syntax Error (1643): Dictionary key must be a name object
+Syntax Error (1941): Illegal character ')'
+Syntax Error (2035): Illegal character ')'
+Syntax Error (2474): Illegal character '>'
+Syntax Error (2476): Illegal character <2f> in hex string
+Syntax Error (2477): Illegal character <72> in hex string
+Syntax Error (2480): Illegal character <54> in hex string
+Syntax Error (2481): Illegal character <73> in hex string
+Syntax Error (2482): Illegal character <69> in hex string
+Syntax Error (2484): Illegal character <6e> in hex string
+Syntax Error (2486): Illegal character <6f> in hex string
+Syntax Error (2488): Illegal character <69> in hex string
+Syntax Error (2489): Illegal character <6e> in hex string
+Syntax Error (2490): Illegal character <67> in hex string
+Syntax Error (2494): Illegal character '>'
+Syntax Error: Unterminated string
+Syntax Error: End of file inside dictionary
+Syntax Error: End of file inside array
+Syntax Error: End of file inside dictionary
+Syntax Error (401): Dictionary key must be a name object
+Syntax Error (410): Dictionary key must be a name object
+Syntax Error (411): Dictionary key must be a name object
+Syntax Error (422): Dictionary key must be a name object
+Syntax Error (485): Illegal character <3d> in hex string
+Syntax Error (490): Illegal character <80> in hex string
+Syntax Error (491): Illegal character <67> in hex string
+Syntax Error (492): Illegal character <74> in hex string
+Syntax Error (493): Illegal character <68> in hex string
+Syntax Error (501): Illegal character '>'
+Syntax Error (1643): Dictionary key must be a name object
+
+Program received signal SIGSEGV, Segmentation fault.
+
+ ► f 0   0x555555846739 GString::resize(int)+1305
+   f 1   0x55555583fea1 GString::GString(GString*)+33
+   f 2   0x5555557c01de Object::copy(Object*)+270
+   f 3   0x5555557c01de Object::copy(Object*)+270
+   f 4   0x55555582cbd8
+   f 5   0x555555675364 Catalog::countPageTree(Object*)+228
+   f 6   0x555555675364 Catalog::countPageTree(Object*)+228
+   f 7   0x5555556754d3 Catalog::countPageTree(Object*)+595
+
+
+(gdb) bt
+
+#0  0x0000555555846739 in GString::resize (this=this@entry=0x555555b88a20, length1=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/goo/GString.cc:109
+#1  0x000055555583fea1 in GString::GString (this=0x555555b88a20, str=0x555555b88760) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/goo/GString.h:80
+#2  0x00005555557c01de in GString::copy (this=0x555555b88760) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/goo/GString.h:42
+#3  Object::copy (this=this@entry=0x555555b84078, obj=obj@entry=0x7fffff7ff1a0) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Object.cc:84
+#4  0x000055555582cbd8 in XRef::fetch (this=0x555555b83990, num=<optimized out>, gen=<optimized out>, obj=0x7fffff7ff1a0, recursion=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/XRef.cc:1212
+#5  0x0000555555675364 in Object::dictLookup (this=<optimized out>, recursion=0, obj=0x7fffff7ff1a0, key=0x5555558a07c7 "Kids") at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Object.h:267
+#6  Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:563
+#7  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#8  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#9  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#10 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#11 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b5d4a0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+
