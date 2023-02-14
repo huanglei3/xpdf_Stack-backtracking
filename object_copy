@@ -1,4 +1,4 @@
-poc:copy30 or copy31
+poc:copy30 or copy31  ;link: https://github.com/huanglei3/xpdf_Stack-backtracking/blob/main/copy30
 
 $ gdb --args pdftotext copy30
 
