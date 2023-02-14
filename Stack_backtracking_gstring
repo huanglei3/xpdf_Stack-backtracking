@@ -1,6 +1,8 @@
 XPDF v4.04
 
-pdftotext gstring_poc
+poc: https://github.com/huanglei3/xpdf_Stack-backtracking/blob/main/gstring_poc
+
+pdftotext gstring_poc  
 
 Syntax Error: Couldn't read xref table
 Syntax Warning: PDF file is damaged - attempting to reconstruct xref table...
