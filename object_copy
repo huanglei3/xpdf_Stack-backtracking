@@ -1,0 +1,64 @@
+$ gdb --args pdftotext /home/fuzz/fuzzing_xpdf/out/default/crashes/id:000030,sig:11,src:003154,time:6419371,execs:2245267,op:havoc,rep:2
+
+pwndbg> r
+
+Syntax Error: Couldn't read xref table
+Syntax Warning: PDF file is damaged - attempting to reconstruct xref table...
+Syntax Error (2667): Dictionary key must be a name object
+Syntax Error (2671): Dictionary key must be a name object
+Syntax Error (2676): Dictionary key must be a name object
+Syntax Error: Dictionary key must be a name object
+Syntax Error: End of file inside dictionary
+Syntax Error (203): Illegal character <2f> in hex string
+Syntax Error (204): Illegal character <54> in hex string
+Syntax Error (205): Illegal character <79> in hex string
+Syntax Error (206): Illegal character <70> in hex string
+Syntax Error (209): Illegal character <52> in hex string
+Syntax Error (211): Illegal character <5d> in hex string
+Syntax Error (216): Illegal character '>'
+Syntax Error (268): Dictionary key must be a name object
+Syntax Error (273): Dictionary key must be a name object
+Syntax Error (396): Dictionary key must be a name object
+Syntax Error (399): Dictionary key must be a name object
+Syntax Error: Unterminated string
+Syntax Error: End of file inside dictionary
+Syntax Error: End of file inside array
+Syntax Error: End of file inside dictionary
+Syntax Error (268): Dictionary key must be a name object
+Syntax Error (273): Dictionary key must be a name object
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00005555557c014b in Object::copy (this=this@entry=0x555555b84078, obj=obj@entry=0x7fffff7ff130) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Object.cc:99
+99	    obj->cmd = copyString(cmd);
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+
+
+►  99     obj->cmd = copyString(cmd);
+
+
+pwndbg> bt
+#0  0x00005555557c014b in Object::copy (this=this@entry=0x555555b84078, obj=obj@entry=0x7fffff7ff130) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Object.cc:99
+#1  0x000055555582cbd8 in XRef::fetch (this=0x555555b83990, num=<optimized out>, gen=<optimized out>, obj=0x7fffff7ff130, recursion=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/XRef.cc:1212
+#2  0x00005555556754a0 in Object::arrayGet (this=0x7fffff7ff120, recursion=0, obj=0x7fffff7ff130, i=17) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Object.h:243
+#3  Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:566
+#4  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#5  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#6  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#7  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#8  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#9  0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#10 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#11 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#12 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#13 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#14 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#15 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#16 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#17 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#18 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#19 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#20 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#21 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#22 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#23 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
+#24 0x00005555556754d3 in Catalog::countPageTree (this=0x555555b852e0, pagesObj=<optimized out>) at /home/fuzz/fuzzing_xpdf/xpdf-4.04/xpdf/Catalog.cc:567
