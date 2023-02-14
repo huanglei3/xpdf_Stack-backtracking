@@ -1,4 +1,6 @@
-$ gdb --args pdftotext /home/fuzz/fuzzing_xpdf/out/default/crashes/id:000030,sig:11,src:003154,time:6419371,execs:2245267,op:havoc,rep:2
+poc:copy30 or copy31
+
+$ gdb --args pdftotext copy30
 
 pwndbg> r
 
