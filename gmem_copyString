@@ -1,6 +1,6 @@
 XPDF v4.04
 
-poc:copyString
+poc:copyString   source link:https://github.com/huanglei3/xpdf_Stack-backtracking/blob/main/copyString
 
 pdftotext copyString
 
